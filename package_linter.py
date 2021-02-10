@@ -1388,6 +1388,11 @@ class Script(TestSuite):
             yield Info("You probably don't need to call 'ynh_normalize_url_path'... this is only relevant for upgrades from super-old versions (like 3 years ago or so...)")
 
     @test()
+    def webpath_available(self):
+        if self.contains("ynh_webpath_available"):
+            yield Info("You probably don't need to call 'ynh_webpath_available'. The domain and path checks are already performed in the core for app install and url change.")
+
+    @test()
     def safe_rm(self):
         if self.contains("rm -r") or self.contains("rm -R") or self.contains("rm -fr") or self.contains("rm -fR"):
             yield Error("You should not be using 'rm -rf', please use 'ynh_secure_remove' instead")
